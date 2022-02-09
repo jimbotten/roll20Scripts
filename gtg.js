@@ -4,7 +4,7 @@
 
 on('ready',()=>{
 	var gtglongrest = function(msg) {
-		charname = msg.content.substring(msg.content.indexOf(" ") + 1);
+		var charname = msg.content.substring(msg.content.indexOf(" ") + 1);
 		var character = findObjs({name: charname, type: "character"}, {caseInsensitive: true})[0];
 		if(!character) {
 			log("NO CHARACTER BY THAT NAME FOUND");
@@ -36,6 +36,7 @@ on('ready',()=>{
   on('chat:message',msg=>{
     if('api'===msg.type && /^!gtglongrest(\b\s|$)/i.test(msg.content)){
       gtglongrest(msg);
+	  sendChat(msg.who, msg.content.substring(msg.content.indexOf(" ") + 1) + " long rested")
     }
   });
 });
